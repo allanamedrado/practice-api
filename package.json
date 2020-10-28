@@ -1,9 +1,26 @@
 {
   "name": "api",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
-  "license": "MIT",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/allanamedrado/practice-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/allanamedrado/practice-api/issues"
+  },
+  "homepage": "https://github.com/allanamedrado/practice-api#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "axios": "^0.21.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.6"
   }
 }

@@ -1,52 +1,18 @@
+const cors = require('cors')
 const express = require('express');
 const app = express();
-const data = require("./data.json");
+const axios = require('axios') //axios parece com fetch 
 
-//resource é uma entidade, tem relacionamento com outras resources
-//verbos http - cria comunicação com resources, criar verbos nas api
 
-app.use(express.json());
-
-app.get('/clients', function(req, res){
-    res.json(data);
-});
-
-app.get('/clients/:id', function(req, res) {
-    const { id } = req.params
-    const client = data.find(cli => cli.id == id);
-
-    if(!client) return res.status(204).json();
-
-    res.json(client);
+app.use(cors())
+app.get('/', async(req, res) => {
+    try {
+        const { data } = await axios('https://jsonplaceholder.typicode.com/users')
+        //console.log(data)
+        return res.json(data)
+    } catch (error) {
+        console.error(error)
+    }    
 })
-app.post('/clients', function(req, res){
-    const { name, email } = req.body;
 
-    res.json({name, email });
-});
-
-app.put('/clients/:id', function(req, res){    
-    const { id } = req.params
-    const client = data.find(cli => cli.id == id);
-
-    if(!client) return res.status(204).json();
-
-    const { name } = req.body
-
-    client.name = name;
-
-    res.json(client)
-
-});
-app.delete('/clients/:id', function(req, res){
-    const { id } = req.params
-    const clientsFiltered = data.filter(client => client.id != id)
-
-    res.json(clientsFiltered)
-});
-
-
-app.listen(3000, function() {
-    console.log("server is running")
-
-})
+app.listen('4567')
